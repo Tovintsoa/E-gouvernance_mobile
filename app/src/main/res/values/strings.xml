@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">E-gouvernance</string>
+    <string name="se_connecter">Se connecter</string>
+    <string name="username">Login / E-mail</string>
+    <string name="password">Mot de passe</string>
+    <string name="login">Se connecter</string>
+    <string name="title_activity_start">StartActivity</string>
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_home">Mes documents\n</string>
+    <string name="menu_gallery">Commander un document</string>
+    <string name="menu_slideshow">Documents intéressants</string>
+    <string name="nav_header_title">E-gouvernance</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Déconnexion</string>
+    <string name="menu_mes_documents">Mes documents</string>
+    <string name="menu_commande_document">Commander un document</string>
+    <string name="menu_document_propose">Documents intéressants</string>
+    <string name="cr_er_un_compte_maintenant">Créer un compte maintenant</string>
+</resources>

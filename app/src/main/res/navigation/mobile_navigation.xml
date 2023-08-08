@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_mes_documents">
+
+    <fragment
+        android:id="@+id/nav_mes_documents"
+        android:name="com.example.e_gouvernance.ui.mes_documents.MesDocumentsFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_mes_documents" />
+
+    <fragment
+        android:id="@+id/nav_commande_documents"
+        android:name="com.example.e_gouvernance.ui.commande_document.CommandeDocumentFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_commande_document" />
+
+    <fragment
+        android:id="@+id/nav_proposition_document"
+        android:name="com.example.e_gouvernance.ui.suggestion_documents.SuggestionDocumentFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_suggestion_document" />
+</navigation>
