@@ -1,11 +1,13 @@
 package com.example.e_gouvernance;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 
+import com.example.e_gouvernance.data.ClientRepository;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -22,6 +24,7 @@ public class StartActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityStartBinding binding;
+    private ClientRepository clientRepository;
 
 
 
@@ -33,6 +36,9 @@ public class StartActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarStart.toolbar);
+
+        clientRepository = new ClientRepository();
+        //clientRepository.getDetailClient();
         binding.appBarStart.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,6 +76,10 @@ public class StartActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_settings) {
+            SharedPreferences sharedPreferences = getSharedPreferences("Session", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.remove("token");
+            editor.apply();
             Intent intent = new Intent(StartActivity.this, MainActivity.class);
             startActivity(intent);
             return true;
