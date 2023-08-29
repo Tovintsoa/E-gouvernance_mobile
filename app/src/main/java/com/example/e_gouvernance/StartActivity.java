@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Menu;
 
 import com.example.e_gouvernance.data.ClientRepository;
+import com.example.e_gouvernance.entity.ClientResponse;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -37,8 +38,11 @@ public class StartActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.appBarStart.toolbar);
 
-        clientRepository = new ClientRepository();
+       /* clientRepository = new ClientRepository();
+        ClientResponse clientResponse = clientRepository.getDetailClient();
+        System.out.println(clientResponse);*/
         //clientRepository.getDetailClient();
+        new ClientRepository(this).execute();
         binding.appBarStart.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
