@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.TextView;
 
 import com.example.e_gouvernance.data.ClientRepository;
 import com.example.e_gouvernance.entity.ClientResponse;
@@ -20,6 +21,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.e_gouvernance.databinding.ActivityStartBinding;
+import com.google.gson.Gson;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -37,12 +43,37 @@ public class StartActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarStart.toolbar);
+        clientRepository = new ClientRepository(this);
+        Call<ClientResponse> call = clientRepository.getUserProfile();
+        call.enqueue(new Callback<ClientResponse>() {
+            @Override
+            public void onResponse(Call<ClientResponse> call, Response<ClientResponse> response) {
+                if (response.isSuccessful()) {
+                    ClientResponse clientResponse = response.body();
+                    if (clientResponse != null) {
+                        Gson gson = new Gson();
+                        TextView mailUser = findViewById(R.id.mailuser);
+                        TextView usernameUser = findViewById(R.id.usernameUser);
+                        mailUser.setText(clientResponse.getUser().getEmail());
+                        usernameUser.setText(clientResponse.getUser().getUsername());
 
-       /* clientRepository = new ClientRepository();
-        ClientResponse clientResponse = clientRepository.getDetailClient();
-        System.out.println(clientResponse);*/
-        //clientRepository.getDetailClient();
-        new ClientRepository(this).execute();
+                        SharedPreferences sharedPreferences = getSharedPreferences("Session", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("user", gson.toJson(clientResponse.getUser()));
+                        editor.apply();
+
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<ClientResponse> call, Throwable t) {
+
+            }
+
+
+        });
+
+
         binding.appBarStart.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
