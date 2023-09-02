@@ -22,4 +22,14 @@
         android:name="com.example.e_gouvernance.ui.suggestion_documents.SuggestionDocumentFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_suggestion_document" />
+    <fragment
+        android:id="@+id/nav_liste_document"
+        android:name="com.example.e_gouvernance.ui.liste_document.ListeDocumentFragment"
+        android:label="@string/menu_document_liste"
+        tools:layout="@layout/fragment_liste_document" />
+    <fragment
+        android:id="@+id/nav_profil"
+        android:name="com.example.e_gouvernance.ui.profil.ProfilFragment"
+        android:label="@string/mon_profil"
+        tools:layout="@layout/fragment_profil" />
 </navigation>

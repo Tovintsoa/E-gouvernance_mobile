@@ -18,8 +18,10 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Déconnexion</string>
-    <string name="menu_mes_documents">Mes documents</string>
+    <string name="menu_mes_documents">Historique de commande</string>
+    <string name="mon_profil">Mon profil</string>
     <string name="menu_commande_document">Commander un document</string>
     <string name="menu_document_propose">Documents intéressants</string>
+    <string name="menu_document_liste">Liste des documents</string>
     <string name="cr_er_un_compte_maintenant">Créer un compte maintenant</string>
 </resources>
