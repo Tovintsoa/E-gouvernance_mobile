@@ -16,6 +16,7 @@ import com.example.e_gouvernance.data.DocumentRepository;
 import com.example.e_gouvernance.entity.CommandeResponse;
 import com.example.e_gouvernance.entity.DocumentUniqueResponse;
 import com.example.e_gouvernance.entity.DocumentResponse;
+import com.example.e_gouvernance.entity.sqlLite.Commande;
 import com.example.e_gouvernance.ui.utilities.Loading;
 
 import java.text.DateFormat;
@@ -29,7 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ListeCommandeViewAdapter extends ArrayAdapter<CommandeResponse> {
+public class ListeCommandeViewAdapter extends ArrayAdapter<Commande> {
     private Context context;
     private List<DocumentResponse> documents;
     Loading loadingDialog;
@@ -37,7 +38,7 @@ public class ListeCommandeViewAdapter extends ArrayAdapter<CommandeResponse> {
     private TextView textView;
     private DocumentUniqueResponse documentUniqueResponse;
 
-    public ListeCommandeViewAdapter(Context context, List<CommandeResponse> values) {
+    public ListeCommandeViewAdapter(Context context, List<Commande> values) {
         super(context, R.layout.list_item_layout,values);
         this.context = context;
 
@@ -51,9 +52,9 @@ public class ListeCommandeViewAdapter extends ArrayAdapter<CommandeResponse> {
         TextView dateText = customView.findViewById(R.id.dateTextView);
         //DocumentRepository documentRepository = new DocumentRepository(getContext());
 
-        CommandeResponse document = getItem(position);
+        Commande document = getItem(position);
 
-        String idDocument = document.getId();
+        String idDocument = document.get_id();
 
 
         ImageView imageRight = customView.findViewById(R.id.menuShow);
@@ -85,7 +86,7 @@ public class ListeCommandeViewAdapter extends ArrayAdapter<CommandeResponse> {
         });
         // Personnalisez votre vue en fonction de la valeur à cette position
         // Par exemple, set le texte dans un TextView dans votre layout personnalisé
-        textView.setText(document.getProduit().getName());
+        textView.setText(document.getProduit());
         SimpleDateFormat isoDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         //SimpleDateFormat isoDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         SimpleDateFormat desiredDateFormat = new SimpleDateFormat("dd/MM/yyyy");
