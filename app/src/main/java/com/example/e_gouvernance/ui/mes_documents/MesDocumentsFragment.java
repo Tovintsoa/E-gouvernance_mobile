@@ -19,15 +19,29 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.e_gouvernance.R;
+import com.example.e_gouvernance.data.CommandeRepository;
+import com.example.e_gouvernance.data.DocumentRepository;
 import com.example.e_gouvernance.databinding.FragmentMesDocumentsBinding;
+import com.example.e_gouvernance.entity.CommandeListResponse;
+import com.example.e_gouvernance.entity.CommandeResponse;
+import com.example.e_gouvernance.entity.DocumentListResponse;
+import com.example.e_gouvernance.entity.DocumentResponse;
 import com.example.e_gouvernance.ui.adapter.ListViewAdapter;
+import com.example.e_gouvernance.ui.adapter.liste_commande.ListeCommandeViewAdapter;
+import com.example.e_gouvernance.ui.adapter.liste_document.ListDocumentViewAdapter;
+import com.example.e_gouvernance.ui.utilities.Loading;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MesDocumentsFragment extends Fragment {
 
     private FragmentMesDocumentsBinding binding;
+    Loading loadingDialog;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -36,18 +50,52 @@ public class MesDocumentsFragment extends Fragment {
 
         binding = FragmentMesDocumentsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
+        loadingDialog = new Loading(getContext());
+        loadingDialog.showLoadingModal();
         final ListView listView = binding.listView;
-        List<String> staticValues = new ArrayList<>();
-        staticValues.add("Valeur 1");staticValues.add("Valeur 1");staticValues.add("Valeur 1");
 
+        /**
+         * appelle ws
+         */
+        CommandeRepository commandeRepository = new CommandeRepository(getContext());
+        Call<CommandeListResponse> call = commandeRepository.getMyCommande();
+        List<CommandeResponse> staticValues = new ArrayList<>();
+        System.out.println("ETO VE ISIKA");
 
-        ListViewAdapter adapter = new ListViewAdapter(
-                requireContext(),
-                staticValues // La liste des valeurs statiques
-        );
+        call.enqueue(new Callback<CommandeListResponse>() {
+            @Override
+            public void onResponse(Call<CommandeListResponse> call, Response<CommandeListResponse> response) {
 
-        listView.setAdapter(adapter);
+                if (response.isSuccessful()) {
+
+                    CommandeListResponse commandeListResponse = response.body();
+                    List<CommandeResponse> commandeResponses = commandeListResponse.getData();
+                    for (CommandeResponse commandeResponse : commandeResponses) {
+                        if(commandeResponse.getProduit() != null) {
+                            staticValues.add(commandeResponse);
+                        }
+                    }
+                    ListeCommandeViewAdapter adapter = new ListeCommandeViewAdapter(
+                            requireContext(),
+                            staticValues // La liste des valeurs statiques
+                    );
+
+                    listView.setAdapter(adapter);
+                    loadingDialog.hideLoadingModal();
+                }
+                else{
+                    System.out.println("sa ici");
+                    loadingDialog.hideLoadingModal();
+                }
+            }
+            @Override
+            public void onFailure(Call<CommandeListResponse> call, Throwable t) {
+                System.out.println("errer"); System.out.println(t.getMessage());
+                loadingDialog.hideLoadingModal();
+            }
+
+        });
+
         return root;
     }
 

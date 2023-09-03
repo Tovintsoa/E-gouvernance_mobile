@@ -12,10 +12,7 @@
             android:id="@+id/nav_mes_documents"
             android:icon="@drawable/ic_menu_article"
             android:title="@string/menu_mes_documents" />
-        <item
-            android:id="@+id/nav_commande_documents"
-            android:icon="@drawable/ic_menu_command"
-            android:title="@string/menu_commande_document" />
+
         <item
             android:id="@+id/nav_proposition_document"
             android:icon="@drawable/ic_menu_suggest"

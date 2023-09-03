@@ -20,7 +20,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.e_gouvernance.R;
 import com.example.e_gouvernance.databinding.FragmentMesDocumentsBinding;
+import com.example.e_gouvernance.entity.User;
 import com.example.e_gouvernance.ui.adapter.ListViewAdapter;
+import com.example.e_gouvernance.ui.adapter.profil.ProfilAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,11 +40,11 @@ public class ProfilFragment extends Fragment {
         View root = binding.getRoot();
 
         final ListView listView = binding.listView;
-        List<String> staticValues = new ArrayList<>();
-        staticValues.add("Profil 1");staticValues.add("Profil 1");staticValues.add("Profil 1");
+        List<User> staticValues = new ArrayList<>();
+        staticValues.add(new User());
 
 
-        ListViewAdapter adapter = new ListViewAdapter(
+        ProfilAdapter adapter = new ProfilAdapter(
                 requireContext(),
                 staticValues // La liste des valeurs statiques
         );
