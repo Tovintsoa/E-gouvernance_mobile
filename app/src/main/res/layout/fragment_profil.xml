@@ -9,12 +9,12 @@
     app:cardElevation="4dp"
     app:cardCornerRadius="8dp"
     app:cardUseCompatPadding="true"
-    android:layout_margin="16dp">
+    android:layout_margin="16dp" >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="16dp" android:id="@+id/profilView">
         <!-- ImageView for Profile Photo -->
         <ImageView
             android:id="@+id/profileImageView"
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:text="Nom et Prénom"
+            android:text=""
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp" />
         <TextView
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Email"
+            android:text=""
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp" />
 
@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Date de Naissance"
+            android:text=""
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp" />
     </LinearLayout>

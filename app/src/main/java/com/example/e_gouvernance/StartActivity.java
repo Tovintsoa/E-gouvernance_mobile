@@ -114,7 +114,9 @@ public class StartActivity extends AppCompatActivity {
             SharedPreferences sharedPreferences = getSharedPreferences("Session", MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.remove("token");
+            editor.remove("user");
             editor.apply();
+
             Intent intent = new Intent(StartActivity.this, MainActivity.class);
             startActivity(intent);
             return true;
