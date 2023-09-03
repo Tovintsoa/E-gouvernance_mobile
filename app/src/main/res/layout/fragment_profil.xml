@@ -10,13 +10,11 @@
     app:cardCornerRadius="8dp"
     app:cardUseCompatPadding="true"
     android:layout_margin="16dp">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp">
-
         <!-- ImageView for Profile Photo -->
         <ImageView
             android:id="@+id/profileImageView"
@@ -24,7 +22,6 @@
             android:layout_height="96dp"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/ic_baseline_person_24" />
-
 
         <TextView
             android:id="@+id/nameTextView"
@@ -34,8 +31,6 @@
             android:text="Nom et Prénom"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp" />
-
-
         <TextView
             android:id="@+id/emailTextView"
             android:layout_width="wrap_content"
@@ -45,7 +40,6 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp" />
 
-
         <TextView
             android:id="@+id/dobTextView"
             android:layout_width="wrap_content"
@@ -54,8 +48,5 @@
             android:text="Date de Naissance"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp" />
-
-
-
     </LinearLayout>
 </androidx.cardview.widget.CardView>
