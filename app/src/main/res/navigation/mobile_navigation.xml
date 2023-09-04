@@ -32,4 +32,9 @@
         android:name="com.example.e_gouvernance.ui.profil.ProfilFragment"
         android:label="@string/mon_profil"
         tools:layout="@layout/fragment_profil" />
+    <fragment
+        android:id="@+id/QrCode"
+        android:name="com.example.e_gouvernance.ui.qrCode.QrCodeFragment"
+        android:label="Scanner QR Code"
+        tools:layout="@layout/fragment_qr_code" />
 </navigation>

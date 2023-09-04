@@ -7,12 +7,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.e_gouvernance.data.ClientRepository;
+import com.example.e_gouvernance.data.CommandeRepository;
 import com.example.e_gouvernance.entity.ClientResponse;
+import com.example.e_gouvernance.ui.utilities.Loading;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -22,6 +27,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.e_gouvernance.databinding.ActivityStartBinding;
 import com.google.gson.Gson;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,6 +39,8 @@ public class StartActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityStartBinding binding;
     private ClientRepository clientRepository;
+    private TextView resultTextView;
+
 
 
 
@@ -86,7 +95,7 @@ public class StartActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_mes_documents, R.id.nav_commande_documents, R.id.nav_proposition_document, R.id.nav_liste_document,R.id.nav_profil)
+                R.id.nav_mes_documents, R.id.nav_commande_documents, R.id.nav_proposition_document, R.id.nav_liste_document,R.id.nav_profil,R.id.QrCode)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_start);
@@ -122,6 +131,55 @@ public class StartActivity extends AppCompatActivity {
             return true;
         } else {
             return super.onOptionsItemSelected(item);
+        }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Loading loadingDialog = new Loading(this);
+       loadingDialog.showLoadingModal();
+        CommandeRepository commandeRepository = new CommandeRepository(this);
+        try {
+            System.out.println("ATOVEE");
+            // Récupérer le résultat du scan depuis l'intent
+            IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+            if (result != null) {
+                if (result.getContents() != null) {
+                    // Le code QR a été scanné avec succès
+                    String scanResult = result.getContents();
+                    System.out.println(scanResult);
+                    commandeRepository.rendreCommande(scanResult).enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            if (response.isSuccessful()) {
+                                Toast.makeText(StartActivity.this, "Vous avez reçu votre commande", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(StartActivity.this, "Le QR Code n'a pas pu être scané. Contacter l'administrateur.", Toast.LENGTH_SHORT).show();
+                            }
+                            loadingDialog.hideLoadingModal();
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            t.printStackTrace();
+                            loadingDialog.hideLoadingModal();
+                            Toast.makeText(StartActivity.this, "Le QR Code n'a pas pu être scané. Contacter l'administrateur.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    Toast.makeText(this, "Scan annulé", Toast.LENGTH_SHORT).show();
+                    loadingDialog.hideLoadingModal();
+                }
+            } else {
+               /* resultTextView.setText("Erreur lors du scan");*/
+                Toast.makeText(this, "Erreur du Scan", Toast.LENGTH_SHORT).show();
+                loadingDialog.hideLoadingModal();
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            Toast.makeText(this, "Erreur du Scan ici", Toast.LENGTH_SHORT).show();
+            loadingDialog.hideLoadingModal();
         }
     }
 }

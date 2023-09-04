@@ -9,6 +9,8 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface CommandeInterface {
     @FormUrlEncoded
@@ -19,4 +21,7 @@ public interface CommandeInterface {
     );
     @GET("me/allCommande")
     Call<CommandeListResponse> getMyCommande(@Header("Authorization") String authHeader);
+    @GET("all/rendreCommande/{id}")
+    Call<Void> rendreCommande(@Header("Authorization")String authHeader ,
+                              @Path("id") String id);
 }

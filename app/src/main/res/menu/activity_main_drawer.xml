@@ -21,5 +21,9 @@
             android:id="@+id/nav_liste_document"
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/menu_document_liste" />
+        <item
+            android:id="@+id/QrCode"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/scanner_qr_code" />
     </group>
 </menu>

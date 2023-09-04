@@ -79,4 +79,7 @@ dependencies {
     implementation ("com.squareup.okhttp3:okhttp:4.9.1")
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.google.zxing:core:3.4.1")
+    implementation ("com.journeyapps:zxing-android-embedded:4.2.0")
+    implementation ("com.android.support:support-annotations:28.0.0")
 }

@@ -2,8 +2,8 @@
     <item
         android:id="@+id/commande"
         android:title="@string/command" />
-    <item
+    <!--<item
         android:id="@+id/menu_item_2"
-        android:title="Option 2" />
+        android:title="Option 2" />-->
     <!-- Ajoutez autant d'options que nécessaire -->
 </menu>

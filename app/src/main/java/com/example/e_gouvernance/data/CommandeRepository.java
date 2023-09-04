@@ -9,6 +9,9 @@ import com.example.e_gouvernance.entity.DocumentListResponse;
 import com.example.e_gouvernance.service.CommandeInterface;
 import com.example.e_gouvernance.service.TokenService;
 
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -17,8 +20,12 @@ public class CommandeRepository {
     private final CommandeInterface commandeInterface;
     private final TokenService tokenService;
     public CommandeRepository(Context context) {
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
+                .readTimeout(30, TimeUnit.SECONDS)
+                .connectTimeout(30, TimeUnit.SECONDS);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(AppConfig.WEB_SERVICE_URL)
+                .client(httpClient.build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -37,6 +44,10 @@ public class CommandeRepository {
     public Call<CommandeListResponse> getMyCommande(){
         String token = "Bearer " + tokenService.getToken();
         return commandeInterface.getMyCommande(token);
+    }
+    public Call<Void> rendreCommande( String id){
+        String token = "Bearer " + tokenService.getToken();
+        return commandeInterface.rendreCommande(token,id);
     }
 
 }

@@ -40,6 +40,5 @@
             android:clickable="true"
             android:visibility="visible"
             />
-
     </LinearLayout>
 </RelativeLayout>

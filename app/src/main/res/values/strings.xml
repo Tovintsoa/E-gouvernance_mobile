@@ -26,4 +26,5 @@
     <string name="cr_er_un_compte_maintenant">Créer un compte maintenant</string>
     <string name="command">Commander ce document</string>
     <string name="annuler">Annuler la commande</string>
+    <string name="scanner_qr_code">Accusé réception du document ici</string>
 </resources>

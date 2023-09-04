@@ -50,6 +50,7 @@ public class ListeCommandeViewAdapter extends ArrayAdapter<Commande> {
         customView = inflater.inflate(R.layout.list_item_layout_liste_commande, parent, false);
         textView = customView.findViewById(R.id.textViewId);
         TextView dateText = customView.findViewById(R.id.dateTextView);
+        TextView badgeEtat = customView.findViewById(R.id.badgeEtat);
         //DocumentRepository documentRepository = new DocumentRepository(getContext());
 
         Commande document = getItem(position);
@@ -87,6 +88,20 @@ public class ListeCommandeViewAdapter extends ArrayAdapter<Commande> {
         // Personnalisez votre vue en fonction de la valeur à cette position
         // Par exemple, set le texte dans un TextView dans votre layout personnalisé
         textView.setText(document.getProduit());
+        System.out.println(document.getEtat()); System.out.println("KAIZA");
+        if(document.getEtat().equals("1")){
+            badgeEtat.setText("Nouveau");
+            badgeEtat.setBackgroundResource(R.drawable.nouveau_docs);
+        }
+        else if(document.getEtat().equals("2") ){
+            badgeEtat.setText("Disponible");
+            badgeEtat.setBackgroundResource(R.drawable.disponible_docs);
+        }
+        else if(document.getEtat().equals("3")){
+            badgeEtat.setText("Reçu");
+            badgeEtat.setBackgroundResource(R.drawable.recu_docs);
+        }
+
         SimpleDateFormat isoDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         //SimpleDateFormat isoDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         SimpleDateFormat desiredDateFormat = new SimpleDateFormat("dd/MM/yyyy");
